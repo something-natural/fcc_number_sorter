@@ -36,12 +36,11 @@ const selectionSort = (arr) => {
 
 //function to insertion sort
 const insertSort = (arr) => {
-    for (let i = 1 ; i < arr.length ; i++){
+    for (let i = 1 ; i < arr.length ; i++){ //start from 1 because you need at least one number before key                
         let key = arr[i];
-        for (let j = i - 1 ; j >= 0 ; j--){
-            console.log(arr,key, i, arr[i], j,arr[j])
+        for (let j = i - 1 ; j >= 0 ; j--){            
             if ( key < arr[j]){                
-                arr[j+1] = arr[j];
+                arr[j+1] = arr[j]; // push arr[j] to arr[j+1]
                 arr[j] = key; 
             }
         }
@@ -73,7 +72,11 @@ const sortInputArray = (e) => {
 
     //const result = bubbleSort(inputValues);
     //const result = selectionSort(inputValues)
-    const result = insertSort(inputValues);
+    //const result = insertSort(inputValues);
+    const result = inputValues.sort((a,b) => {
+        return a-b;
+    }        
+    )
     
     //render result
     renderResult(inputValues);
