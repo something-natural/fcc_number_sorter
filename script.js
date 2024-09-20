@@ -3,41 +3,57 @@ const sortBtn = document.getElementById("sort");
 
 
 //function to bubble sort
-const bubbleSort = (array) => {
-    for (let i = 0 ; i < array.length ; i++ ){ // repeat as array length
-        for (let j = 0; j < array.length -1 ; j++){
-            if (array[j] > array[j+1]){
-                const temp = array[j];
-                array[j] = array[j+1];
-                array[j+1] = temp;
+const bubbleSort = (arr) => {
+    for (let i = 0 ; i < arr.length ; i++ ){ // repeat as arr length
+        for (let j = 0; j < arr.length -1 ; j++){
+            if (arr[j] > arr[j+1]){
+                const temp = arr[j];
+                arr[j] = arr[j+1];
+                arr[j+1] = temp;
             }
         }        
     }
-    return array;
+    return arr;
 };
 
-const selectionSort = (array) => {
-    for (let i = 0 ; i < array.length ; i++){
+//function to selection sort
+const selectionSort = (arr) => {
+    for (let i = 0 ; i < arr.length ; i++){
         let minNumIndex = i; // set min number's index to i
-        for (let j = i+1 ; j < array.length ; j++){                        
-            if ( array[j] < array[minNumIndex]){ 
+        for (let j = i+1 ; j < arr.length ; j++){                        
+            if ( arr[j] < arr[minNumIndex]){ 
                 minNumIndex = j; // change min number's index to j
             }            
         }
         // using change numbers using index
-        const temp = array[i]        
-        array[i] = array[minNumIndex]
-        array[minNumIndex] = temp;
+        const temp = arr[i]        
+        arr[i] = arr[minNumIndex]
+        arr[minNumIndex] = temp;
     }
-    return array;
+    return arr;
 }
 
 
+//function to insertion sort
+const insertSort = (arr) => {
+    for (let i = 1 ; i < arr.length ; i++){
+        let key = arr[i];
+        for (let j = i - 1 ; j >= 0 ; j--){
+            console.log(arr,key, i, arr[i], j,arr[j])
+            if ( key < arr[j]){                
+                arr[j+1] = arr[j];
+                arr[j] = key; 
+            }
+        }
+    }
+    return arr;
+}
+
 
 //function to render
-const renderResult = (array = []) => {
+const renderResult = (arr = []) => {
     
-    array.forEach((num,i) => { // using array value and index
+    arr.forEach((num,i) => { // using arr value and index
         // select target with index
         const target = document.getElementById(`output-value-${i}`);
 
@@ -52,11 +68,12 @@ const sortInputArray = (e) => {
     //prevent referesh
     e.preventDefault();    
     
-    //get input value and turn to number array
+    //get input value and turn to number arr
     const inputValues = [...document.getElementsByClassName("values-dropdown")].map((item) => Number(item.value));
 
     //const result = bubbleSort(inputValues);
-    const result = selectionSort(inputValues)
+    //const result = selectionSort(inputValues)
+    const result = insertSort(inputValues);
     
     //render result
     renderResult(inputValues);
